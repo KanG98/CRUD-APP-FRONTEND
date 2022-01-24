@@ -7,10 +7,6 @@ import "../InfoPage.css"
 const api = "http://localhost:8080/api"
 
 export default function StudentPage(){
-    // contains single student info 
-    // contains student's campus card
-
-    // state: student info, attending college 
 
     const [curId, setCurId] = useState()
     const [stuInfo, setStuInfo] = useState({
@@ -29,7 +25,7 @@ export default function StudentPage(){
     }, [params.id])
 
     useEffect(() => {
-        fetch(`${api}/students/byStudentId/${params.id}`,{
+        fetch(`${api}/student/byStudentId/${params.id}`,{
                 method: "GET",
                 mode: 'cors'
             })
@@ -50,7 +46,7 @@ export default function StudentPage(){
     }
 
     if (goToEdit) {
-        return (<Navigate replace to={`../students/edit/${curId}`}/>)
+        return (<Navigate replace to={`../student/edit/${curId}`}/>)
     }
 
     return (
