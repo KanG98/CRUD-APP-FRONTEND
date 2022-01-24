@@ -4,11 +4,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Home from "./components/Home";
 import StudentEditPage from './components/StudentEditPage'
+import CampusEditPage from './components/CampusEditPage'
 
 function App() {
   const [] = useState()
   // const HomePage = () => (<Home />);
   const StudentEditPageComponent = () => (<StudentEditPage />)
+  const CampusEditPageComponent =() => (<CampusEditPage />)
 
 
 
@@ -19,6 +21,7 @@ function App() {
           {/* <Route exact path="/" element={<HomePage/>} /> */}
 
           <Route exact path="/student/edit/:id" element={<StudentEditPageComponent/>} />
+          <Route exact path="/campus/edit/:id" element={<CampusEditPageComponent/>} />
 
           {/* <Route exact path="/student/:id" element={<StudentPage/>}/> */}
           {/* <Route exact path="/campus/:id" element={<CampusPage/>}/> */}

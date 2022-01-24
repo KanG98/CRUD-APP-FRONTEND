@@ -10,10 +10,6 @@ function capitalizeFirstLetter(string) {
   }
 
 export default function StudentEditPage(props){
-    
-    // contains form to edit student
-
-    // state: student info
 
     const [curId, setCurId] = useState()
     const [stuInfo, setStuInfo] = useState()
@@ -93,7 +89,7 @@ export default function StudentEditPage(props){
 
     return (
         <div>
-            <p>StudentEditPage {curId}</p>
+            <p>current student  {curId}</p>
             <form method="PUT" onSubmit={handleSubmit}>
                 <label htmlFor="name">Student Name&#42;: </label>
                 <input type="text" id="name" name="name" onChange={handleNameChange}/>
