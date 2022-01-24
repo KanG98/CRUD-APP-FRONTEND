@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom"
 
 
 const api = "http://localhost:8080/api"
@@ -14,6 +14,7 @@ export default function StudentEditPage(props){
     const [curId, setCurId] = useState()
     const [stuInfo, setStuInfo] = useState()
     const [newStuInfo, setNewStuInfo] = useState()
+    const [submitted, setSubmitted] = useState(false)
     const params = useParams()
 
     useEffect(() =>{
@@ -82,9 +83,14 @@ export default function StudentEditPage(props){
             }
             axios.put(`${api}/students/${params.id}`, body)
                 .then(res => console.log(res))
+                .then(res => setSubmitted(true))
                 .catch(error => console.log(error))
 
         }
+    }
+
+    if(submitted){
+        return <Navigate replace to={`/students/${curId}`}/> 
     }
 
     return (
