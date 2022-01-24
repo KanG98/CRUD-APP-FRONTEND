@@ -81,7 +81,6 @@ export default function StudentEditPage(props){
     
     function handleCampusChange(e){
         if(e.target.value == "NotAttendingCampus"){
-            console.log("working")
             setNewStuInfo(prev => ({...newStuInfo, campus: null}))
         }else{
             setNewStuInfo(prev => ({...newStuInfo, campus: capitalizeFirstLetter(e.target.value)}))

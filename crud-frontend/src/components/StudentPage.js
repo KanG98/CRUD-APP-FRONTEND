@@ -63,8 +63,6 @@ export default function StudentPage(){
     return (
     
         <div>
-            {console.log(params.id)}
-
             <nav>sample nav bar</nav>
 
             <div className="info-section">
