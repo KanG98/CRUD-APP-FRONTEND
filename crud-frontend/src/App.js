@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Home from "./components/Home";
+import StudentPage from './components/StudentPage'
 import StudentEditPage from './components/StudentEditPage'
 import CampusEditPage from './components/CampusEditPage'
 
 function App() {
   const [] = useState()
   // const HomePage = () => (<Home />);
+  const StudentInfoPageComponent = () => (<StudentPage />)
   const StudentEditPageComponent = () => (<StudentEditPage />)
   const CampusEditPageComponent =() => (<CampusEditPage />)
 
@@ -19,8 +21,8 @@ function App() {
       <div>
         <Routes>
           {/* <Route exact path="/" element={<HomePage/>} /> */}
-
-          <Route exact path="/student/edit/:id" element={<StudentEditPageComponent/>} />
+          <Route exact path="/students/:id" element={<StudentInfoPageComponent/>} />
+          <Route exact path="/students/edit/:id" element={<StudentEditPageComponent/>} />
           <Route exact path="/campus/edit/:id" element={<CampusEditPageComponent/>} />
 
           {/* <Route exact path="/student/:id" element={<StudentPage/>}/> */}
