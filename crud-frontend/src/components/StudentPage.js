@@ -1,6 +1,7 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import { Navigate, useParams } from "react-router-dom"
+import axios from "axios"
 import "../InfoPage.css"
 
 
@@ -25,7 +26,7 @@ export default function StudentPage(){
     }, [params.id])
 
     useEffect(() => {
-        fetch(`${api}/student/byStudentId/${params.id}`,{
+        fetch(`${api}/students/byStudentId/${params.id}`,{
                 method: "GET",
                 mode: 'cors'
             })
@@ -45,6 +46,16 @@ export default function StudentPage(){
         setGoToEdit(true)
     }
 
+    function handleDeleteStudent(){
+        axios.delete(
+            `http://localhost:8080/api/students/${curId}`
+           )
+        .then()
+        // go to home page
+
+        .catch(err => alert(err))
+    }
+
     if (goToEdit) {
         return (<Navigate replace to={`../student/edit/${curId}`}/>)
     }
@@ -52,8 +63,6 @@ export default function StudentPage(){
     return (
     
         <div>
-            {console.log(params.id)}
-
             <nav>sample nav bar</nav>
 
             <div className="info-section">
@@ -64,6 +73,7 @@ export default function StudentPage(){
                     <p>GPA: {stuInfo.gpa}</p>
                     <p>Email: {stuInfo.email}</p>
                     <button onClick={handleGoToEdit}>Edit</button>
+                    <button onClick={handleDeleteStudent}>Delete Student</button>
                 </div>
 
             </div>

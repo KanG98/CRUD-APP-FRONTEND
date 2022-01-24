@@ -13,12 +13,34 @@ export default function StudentEditPage(props){
 
     const [curId, setCurId] = useState()
     const [stuInfo, setStuInfo] = useState()
+    const [campusArr, setCampusArr] = useState([null])
     const [newStuInfo, setNewStuInfo] = useState()
     const [submitted, setSubmitted] = useState(false)
     const params = useParams()
 
     useEffect(() =>{
         setCurId(params.id)
+
+        //get all campuses
+
+        fetch(`${api}/campuses/`,{
+            method: "GET",
+            mode: 'cors'
+        })
+
+        .then(res => {
+            if(res.status == 204){
+                alert("Data not exist")
+            }
+            return res.json()
+        })
+        .then(res => {
+            setCampusArr([null, ...res])
+        })
+        .catch(e => console.log(e)) 
+
+
+
     }, [])
 
     useEffect(() => {
@@ -58,7 +80,11 @@ export default function StudentEditPage(props){
     }
     
     function handleCampusChange(e){
-        setNewStuInfo(prev => ({...newStuInfo, campus: capitalizeFirstLetter(e.target.value)}))
+        if(e.target.value == "NotAttendingCampus"){
+            setNewStuInfo(prev => ({...newStuInfo, campus: null}))
+        }else{
+            setNewStuInfo(prev => ({...newStuInfo, campus: capitalizeFirstLetter(e.target.value)}))
+        }
     }
     
     function handleGPAChange(e){
@@ -102,8 +128,16 @@ export default function StudentEditPage(props){
                 <label htmlFor="img_url">Student Image Url&#42;: </label>
                 <input type="text" id="img_url" name="img_url" onChange={handleImgChange}/>
                 <br></br>
+
                 <label htmlFor="campus">Student Campus: </label>
-                <input type="text" id="campus" name="campus" onChange={handleCampusChange}/>
+                <select name="campus" id="campus" onChange={handleCampusChange}>
+                    {campusArr.length < 2 ? <option></option> : 
+                        campusArr.map((c) => {
+                            return (c == null ? <option value="NotAttendingCampus"></option> : <option value={c["campus_name"]}>{c["campus_name"]}</option>)
+                        }
+                    )}
+                </select>
+                {/* <input type="text" id="campus" name="campus" onChange={handleCampusChange}/> */}
                 <label htmlFor="gpa">GPA&#42;: </label>
                 <input type="range" min="0" max="4.0" step="1" id="gpa" name="gpa" onChange={handleGPAChange} />
                 <output id="gpa-output">1</output>
