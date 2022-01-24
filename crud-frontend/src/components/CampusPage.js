@@ -1,6 +1,7 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import { Navigate, useParams } from "react-router-dom"
+import axios from "axios"
 import "../InfoPage.css"
 
 
@@ -44,6 +45,16 @@ export default function CampusPage(){
         setGoToEdit(true)
     }
 
+    function handleDeleteCampus(){
+        axios.delete(
+            `http://localhost:8080/api/campuses/${curId}`
+           )
+        .then()
+        // go to home page
+
+        .catch(err => alert(err))
+    }
+
     if (goToEdit) {
         return (<Navigate replace to={`../campus/edit/${curId}`}/>)
     }
@@ -61,6 +72,7 @@ export default function CampusPage(){
                     <p>Location: {campusInfo.campus_location}</p>
                     <p>Description: {campusInfo.campus_description}</p>
                     <button onClick={handleGoToEdit}>Edit</button>
+                    <button onClick={handleDeleteCampus}>Delete Campus</button>
                 </div>
 
             </div>
